@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OUTFIT APP</title>
+<style>
+:root{--brown:#3B2924;--cream:#F5EFE6;--olive:#7A8060;--olive2:#68704f;--card:#fffaf3;--line:#ded4c5;--muted:#82796d}
+*{box-sizing:border-box}body{margin:0;background:#d8d0c4;color:var(--brown);font-family:Arial,sans-serif}
+.app{width:min(430px,100vw);min-height:100vh;margin:auto;background:var(--cream);position:relative;box-shadow:0 0 35px #0002}
+main{padding:0 18px 95px}.top{padding:24px 20px 8px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:Georgia,serif;font-size:23px;letter-spacing:2px}.brand span{display:block;font:9px Arial;letter-spacing:3px;margin-top:3px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--olive);display:grid;place-items:center;color:#fff;font-weight:bold}
+.screen{display:none}.screen.active{display:block}h1,h2,h3{font-family:Georgia,serif;font-weight:500}h1{font-size:30px;margin:14px 0 5px}h2{font-size:25px;margin:16px 0 5px}h3{font-size:18px}
+.muted{font-size:13px;color:var(--muted)}.search{margin:15px 0;padding:12px 15px;border:1px solid var(--line);border-radius:18px;background:#fffaf3;color:#aaa}
+.hero{height:205px;border-radius:21px;overflow:hidden;position:relative;background:linear-gradient(90deg,#3b2924e8,#3b292444),url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80') center/cover;color:#fff;padding:22px}
+.hero h1{font-size:34px;line-height:1.03;margin:0;max-width:210px}.hero p{font-size:13px;max-width:225px;line-height:1.4}.btn{border:0;border-radius:14px;background:var(--olive);color:white;padding:12px 17px;font-weight:bold;cursor:pointer}.hero .btn{background:#7a8060ee}.dots{position:absolute;right:17px;bottom:16px}.dot{display:inline-block;width:7px;height:7px;background:#fff8;border-radius:50%;margin-left:5px}.dot.active{background:white}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.quick button{border:0;background:none;color:var(--brown);font-size:11px;cursor:pointer}.ico{height:55px;width:55px;margin:auto auto 7px;border-radius:17px;background:var(--olive);color:white;display:grid;place-items:center;font-size:25px}
+.rowtitle{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}.rowtitle h2{margin:0}.link{font-size:12px;text-decoration:underline;cursor:pointer}
+.inspo{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.inspo .pic{height:125px;border-radius:13px;overflow:hidden}.inspo img{width:100%;height:100%;object-fit:cover}.caption{font-size:10px;margin:6px 2px}
+.nav{position:fixed;bottom:0;width:min(430px,100vw);height:76px;background:#fffaf3;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20}.nav button{border:0;background:none;color:#777;font-size:10px;cursor:pointer}.nav span{display:block;font-size:22px;margin-bottom:4px}.nav .plus{width:48px;height:48px;margin:4px auto;border-radius:50%;background:var(--olive);color:#fff;font-size:30px;line-height:48px}.nav .active{color:var(--olive);font-weight:bold}
+.cardgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:15px}.item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}.itempic{height:145px;background:#ebe3d7;display:grid;place-items:center;font-size:55px;position:relative}.itempic img{width:100%;height:100%;object-fit:cover}.itemtext{padding:9px;font-size:13px}.itemtext small{display:block;color:var(--muted);margin-top:3px}.x{position:absolute;right:6px;top:6px;border:0;background:#fff;border-radius:50%;width:27px;height:27px}
+.form{background:var(--card);border:1px solid var(--line);padding:14px;border-radius:17px;margin-top:15px}.form input,.form select{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;margin:5px 0 9px;background:white;color:var(--brown)}
+.chips{display:flex;gap:7px;overflow:auto;padding:12px 0}.chip{white-space:nowrap;border:1px solid var(--line);background:none;border-radius:20px;padding:8px 12px}.chip.on{background:var(--olive);color:white;border-color:var(--olive)}
+.outfit{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:13px;margin-top:15px}.outfitgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.piece{background:#eee6da;border-radius:14px;overflow:hidden}.piecepic{height:130px;display:grid;place-items:center;font-size:55px}.piecepic img{width:100%;height:100%;object-fit:cover}.piece p{padding:7px 9px;margin:0;font-size:12px}
+.optiongrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.option{padding:15px;background:var(--card);border:1px solid var(--line);border-radius:17px;cursor:pointer}.option b{display:block;margin-bottom:5px}.option small{color:var(--muted)}
+.profilebox{background:var(--card);border-radius:20px;padding:20px;margin-top:15px;border:1px solid var(--line)}.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;margin:18px 0}.stats b{display:block;font-size:21px}.stylebox{background:var(--olive);color:#fff;border-radius:15px;padding:14px}
+.empty{text-align:center;color:var(--muted);padding:30px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand">OUTFIT APP<span>DIT TØJ · DIN STIL</span></div><div class="avatar">S</div></header>
+<main>
+<section id="home" class="screen active">
+<h1>Hej Summer ♡</h1><div class="muted">Klar til at finde dit næste outfit?</div>
+<div class="search">⌕ &nbsp; Søg efter outfits, tøj, farver eller kategorier...</div>
+<div class="hero"><h1>Find<br>din stil.</h1><p>Lad appen inspirere dig, og skab outfits ud fra dit eget tøj.</p><button class="btn" onclick="go('create')">Kom i gang →</button><div class="dots"><i class="dot active"></i><i class="dot"></i><i class="dot"></i></div></div>
+<div class="quick">
+<button onclick="go('create')"><div class="ico">♧</div>Skab outfit</button>
+<button onclick="go('outfits')"><div class="ico">▣</div>Mine outfits</button>
+<button onclick="go('favorites')"><div class="ico">♡</div>Favoritter</button>
+<button onclick="go('wardrobe')"><div class="ico">⊞</div>Garderobe</button>
+</div>
+<div class="rowtitle"><h2>Inspiration til dig</h2><span class="link" onclick="go('inspiration')">Se alle →</span></div>
+<div class="inspo">
+<div><div class="pic"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Casual</div></div>
+<div><div class="pic"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Sporty</div></div>
+<div><div class="pic"><img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Date night</div></div>
+</div>
+</section>
+
+<section id="create" class="screen">
+<h2>Skab dit outfit</h2><div class="muted">Vil du selv vælge, eller skal appen hjælpe?</div>
+<div class="optiongrid"><div class="option" onclick="generate()"><b>✨ AI-forslag</b><small>Appen sammensætter et outfit fra din garderobe.</small></div><div class="option" onclick="manual()"><b>＋ Vælg selv</b><small>Sammensæt dit outfit stykke for stykke.</small></div></div>
+<div id="result"></div>
+</section>
+
+<section id="wardrobe" class="screen">
+<h2>Min garderobe</h2><div class="muted">Alt dit tøj samlet ét sted.</div>
+<div class="form"><input id="name" placeholder="Fx beige strik"><select id="cat"><option value="top">Overdel</option><option value="bottom">Underdele</option><option value="shoes">Sko</option><option value="outer">Jakke</option><option value="accessory">Accessory</option></select><input id="emoji" placeholder="Emoji fx 👕"><input id="file" type="file" accept="image/*"><button class="btn" style="width:100%" onclick="add()">+ Tilføj tøj</button></div>
+<div class="chips"><button class="chip on" onclick="filterCat('all',this)">Alle</button><button class="chip" onclick="filterCat('top',this)">Overdele</button><button class="chip" onclick="filterCat('bottom',this)">Underdele</button><button class="chip" onclick="filterCat('shoes',this)">Sko</button><button class="chip" onclick="filterCat('outer',this)">Jakker</button></div>
+<div id="wardrobeGrid" class="cardgrid"></div>
+</section>
+
+<section id="inspiration" class="screen"><h2>Inspiration</h2><div class="muted">Find nye måder at bruge dit tøj på.</div><div class="hero" style="margin-top:15px;background:linear-gradient(90deg,#7a8060ee,#7a806055),url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80') center/cover"><h1>Samme tøj.<br>Nye muligheder.</h1><p>Inspiration til din personlige stil.</p></div><div class="rowtitle"><h2>Populære looks</h2></div><div class="inspo"><div><div class="pic"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Minimal</div></div><div><div class="pic"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Everyday</div></div><div><div class="pic"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400&q=80"></div><div class="caption">Elegant</div></div></div></section>
+
+<section id="outfits" class="screen"><h2>Mine outfits</h2><div id="savedOutfits"></div></section>
+<section id="favorites" class="screen"><h2>Favoritter</h2><div class="empty">♡ Dine gemte outfits vises her.</div></section>
+<section id="profile" class="screen"><h2>Min profil</h2><div class="profilebox"><div class="avatar" style="margin:auto;width:70px;height:70px;font-size:25px">S</div><h2 style="text-align:center">Summer ♡</h2><div class="stats"><div><b>24</b>Outfits</div><div><b>12</b>Favoritter</div><div><b>3</b>Kategorier</div></div><div class="stylebox"><b>Min stil</b><br><small>Klassisk · feminin · cool</small></div></div></section>
+</main>
+<nav class="nav">
+<button onclick="go('home')" data="home" class="active"><span>⌂</span>Hjem</button>
+<button onclick="go('outfits')" data="outfits"><span>♧</span>Mine outfits</button>
+<button onclick="go('create')" data="create"><div class="plus">+</div></button>
+<button onclick="go('wardrobe')" data="wardrobe"><span>▣</span>Garderobe</button>
+<button onclick="go('profile')" data="profile"><span>♙</span>Profil</button>
+</nav>
+</div>
+<script>
+let items=JSON.parse(localStorage.getItem('outfitItems2')||'null')||[
+{id:1,name:'Beige strik',cat:'top',emoji:'🧶'},{id:2,name:'Blå jeans',cat:'bottom',emoji:'👖'},
+{id:3,name:'Hvide sneakers',cat:'shoes',emoji:'👟'},{id:4,name:'Sort blazer',cat:'outer',emoji:'🧥'},
+{id:5,name:'Brun taske',cat:'accessory',emoji:'👜'}
+];let saved=JSON.parse(localStorage.getItem('savedOutfits')||'[]'),filter='all';
+const names={top:'Overdel',bottom:'Underdele',shoes:'Sko',outer:'Jakke',accessory:'Accessory'};
+function save(){localStorage.setItem('outfitItems2',JSON.stringify(items))}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.getAttribute('data')===id));render();scrollTo(0,0)}
+function card(x,del=true){return `<div class="item"><div class="itempic">${x.image?`<img src="${x.image}">`:x.emoji||'👕'}${del?`<button class="x" onclick="removeItem(${x.id})">×</button>`:''}</div><div class="itemtext"><b>${x.name}</b><small>${names[x.cat]}</small></div></div>`}
+function render(){let arr=filter==='all'?items:items.filter(x=>x.cat===filter);document.getElementById('wardrobeGrid').innerHTML=arr.map(x=>card(x)).join('')||'<div class="empty">Ingen ting endnu.</div>';document.getElementById('savedOutfits').innerHTML=saved.length?saved.map((o,i)=>`<div class="outfit"><h3>Outfit ${i+1}</h3><div class="outfitgrid">${o.map(x=>`<div class="piece"><div class="piecepic">${x.image?`<img src="${x.image}">`:x.emoji}</div><p>${x.name}</p></div>`).join('')}</div></div>`).join(''):'<div class="empty">Du har ikke gemt outfits endnu.</div>'}
+function removeItem(id){items=items.filter(x=>x.id!==id);save();render()}
+function filterCat(f,b){filter=f;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');render()}
+function add(){let name=document.getElementById('name').value.trim();if(!name)return alert('Skriv et navn på tøjet.');let cat=document.getElementById('cat').value,emoji=document.getElementById('emoji').value||'👕',file=document.getElementById('file').files[0];let done=image=>{items.push({id:Date.now(),name,cat,emoji,image});save();document.getElementById('name').value='';document.getElementById('emoji').value='';document.getElementById('file').value='';render()};if(file){let r=new FileReader();r.onload=()=>done(r.result);r.readAsDataURL(file)}else done('')}
+function choose(cat){let a=items.filter(x=>x.cat===cat);return a.length?a[Math.floor(Math.random()*a.length)]:null}
+function generate(){let arr=['top','bottom','shoes','outer','accessory'].map(choose).filter(Boolean);if(arr.length<2)return alert('Tilføj mindst en overdel og en underdel i garderoben.');showResult(arr,'AI har fundet dette outfit ✨')}
+function showResult(arr,title){document.getElementById('result').innerHTML=`<div class="outfit"><div style="display:flex;justify-content:space-between;align-items:center"><h3>${title}</h3><button class="btn" onclick="generate()">↻ Nyt</button></div><div class="outfitgrid">${arr.map(x=>`<div class="piece"><div class="piecepic">${x.image?`<img src="${x.image}">`:x.emoji}</div><p><b>${x.name}</b><br><small>${names[x.cat]}</small></p></div>`).join('')}</div><button class="btn" style="width:100%;margin-top:10px" onclick='saveOutfit(${JSON.stringify(arr).replaceAll("'","&#39;")})'>♡ Gem outfit</button></div>`}
+function saveOutfit(arr){saved.push(arr);localStorage.setItem('savedOutfits',JSON.stringify(saved));alert('Outfittet er gemt ♡');go('outfits')}
+function manual(){let html='<div class="chips">Vælg dit eget tøj:</div><div class="cardgrid">';items.forEach(x=>html+=`<div class="item" onclick="pickManual(${x.id},this)"><div class="itempic">${x.image?`<img src="${x.image}">`:x.emoji}</div><div class="itemtext"><b>${x.name}</b><small>${names[x.cat]}</small></div></div>`);html+='</div><button class="btn" style="width:100%;margin-top:14px" onclick="finishManual()">Se mit outfit</button>';document.getElementById('result').innerHTML=html;window.manualPick={}}
+function pickManual(id,el){let x=items.find(i=>i.id===id);window.manualPick[x.cat]=x;el.style.outline='3px solid var(--olive)'}
+function finishManual(){let arr=Object.values(window.manualPick||{});if(arr.length<2)return alert('Vælg mindst to stykker tøj.');showResult(arr,'Mit outfit')}
+render()
+</script>
+</body>
+</html>
